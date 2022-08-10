@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:investments_app/constants.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-   
-   if (kIsWeb){
-    
-   }
-   else{
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-   }
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    if (kIsWeb) {
+    } else {}
 
     Size deviceSize = MediaQuery.of(context).size;
 
@@ -28,6 +28,8 @@ class HomeScreen extends StatelessWidget {
         fontWeight: FontWeight.w600,
         fontSize: 12);
 
+    int currentIndex = 0;
+
     return Scaffold(
       appBar: newAppbar(),
       body: Center(
@@ -35,6 +37,32 @@ class HomeScreen extends StatelessWidget {
               headStyle: headStyle,
               subStyle: subStyle,
               deviceSize: deviceSize)),
+      bottomNavigationBar: BottomNavigationBar(
+         type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          onTap: (index) => setState(() => currentIndex = index),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+              
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favourite',
+              
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'User',
+              
+            )
+          ]),
     );
   }
 }
@@ -184,7 +212,6 @@ class MainContainer extends StatelessWidget {
           ),
         )
       ]),
-      
       width: deviceSize.width * 0.9,
       height: deviceSize.height * 0.22,
       decoration: BoxDecoration(
